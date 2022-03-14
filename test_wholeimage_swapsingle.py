@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     with torch.no_grad():
         pic_a = opt.pic_a_path
-
+ 
         img_a_whole = cv2.imread(pic_a)
         img_a_align_crop, _ = app.get(img_a_whole,crop_size)
         img_a_align_crop_pil = Image.fromarray(cv2.cvtColor(img_a_align_crop[0],cv2.COLOR_BGR2RGB)) 
@@ -72,7 +72,9 @@ if __name__ == '__main__':
         latend_id = model.netArc(img_id_downsample)
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
-
+        ############## print identity ##############
+        print_image=Image.fromarray(latend_id)
+        print(print_image)
         ############## Forward Pass ######################
 
         pic_b = opt.pic_b_path
@@ -101,19 +103,12 @@ if __name__ == '__main__':
             net.eval()
         else:
             net =None
-        ############################################
-        ############################################    
-        # print('************ tensor ************')
-        # for tensor_check in b_align_crop_tenor_list:
-        #     print(tensor_check)
-        # print('************ swap_result ************')
-        # for swap_result in swap_result_list:
-        #     print(swap_result)
-        ############################################
-        ############################################
+            
+        for i in swap_result_list:
+            print_swap_image = Image.fromarray(i)
+            print(print_swap_image)
 
-        
-        print("Hair change option :",hairchg)
+        # print("Hair change option :",hairchg)
 
         reverse2wholeimage(b_align_crop_tenor_list, swap_result_list, b_mat_list, crop_size, img_b_whole, logoclass, \
             os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm,hairchg=hairchg)
