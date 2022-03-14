@@ -34,6 +34,14 @@ def _totensor(array):
     tensor = torch.from_numpy(array)
     img = tensor.transpose(0, 1).transpose(0, 2).contiguous()
     return img.float().div(255)
+
+def tensor_to_image(tensor):
+    tensor = tensor*255
+    tensor = np.array(tensor, dtype=np.uint8)
+    if np.ndim(tensor)>3:
+        assert tensor.shape[0] == 1
+        tensor = tensor[0]
+    return Image.fromarray(tensor)
 if __name__ == '__main__':
     opt = TestOptions().parse()
     hairchg= opt.hairchg
@@ -73,9 +81,7 @@ if __name__ == '__main__':
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
         ############## print identity ##############
-        
-
-        print_image=Image.fromarray(_totensor(latend_id))
+        print_image = tensor_to_image(latend_id)
         print(print_image)
         ############## Forward Pass ######################
 
