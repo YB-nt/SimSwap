@@ -111,9 +111,9 @@ if __name__ == '__main__':
         else:
             net =None
 
-        for i,v in enumerate(swap_result_list):
-            print_swap_image = tensor_to_image(v)
-            print_swap_image.save(f'{i}_B.png',format='PNG')
+        # for i,v in enumerate(swap_result_list):
+        #     print_swap_image = tensor_to_image(v)
+        #     print_swap_image.save(f'{i}_B.png',format='PNG')
         
         # print("Hair change option :",hairchg)
 
