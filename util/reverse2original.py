@@ -11,6 +11,29 @@ def encode_segmentation_rgb(segmentation, no_neck=True):
 
     face_part_ids = [1, 2, 3, 4, 5, 6, 10, 12, 13] if no_neck else [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14]
     mouth_id = 11
+    # hair_id = 17
+    face_map = np.zeros([parse.shape[0], parse.shape[1]])
+    mouth_map = np.zeros([parse.shape[0], parse.shape[1]])
+    # hair_map = np.zeros([parse.shape[0], parse.shape[1]])
+
+    for valid_id in face_part_ids:
+        valid_index = np.where(parse==valid_id)
+        face_map[valid_index] = 255
+    valid_index = np.where(parse==mouth_id)
+    mouth_map[valid_index] = 255
+    # valid_index = np.where(parse==hair_id)
+    # hair_map[valid_index] = 255
+    # return np.stack([face_map, mouth_map,hair_map], axis=2)
+    return np.stack([face_map, mouth_map], axis=2)
+
+def hair_encode_segmentation_rgb(segmentation):
+    """
+    hairstyle change
+    """
+    parse = segmentation
+
+    face_part_ids = [1, 2, 3, 4, 5, 6, 10, 12, 13] if no_neck else [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14]
+    mouth_id = 11
     hair_id = 17
     face_map = np.zeros([parse.shape[0], parse.shape[1]])
     mouth_map = np.zeros([parse.shape[0], parse.shape[1]])
@@ -24,20 +47,6 @@ def encode_segmentation_rgb(segmentation, no_neck=True):
     valid_index = np.where(parse==hair_id)
     hair_map[valid_index] = 255
     return np.stack([face_map, mouth_map,hair_map], axis=2)
-    # return np.stack([face_map, mouth_map], axis=2)
-
-def hair_encode_segmentation_rgb(segmentation):
-    """
-    hairstyle change
-    """
-    parse = segmentation
-
-    hair_id = 17
-    hair_map = np.zeros([parse.shape[0], parse.shape[1]])
-    valid_index = np.where(parse==hair_id)
-    hair_map[valid_index] =255
-
-    return np.stack([hair_map],axis=2)
     
 
 
