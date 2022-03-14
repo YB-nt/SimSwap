@@ -26,6 +26,20 @@ def encode_segmentation_rgb(segmentation, no_neck=True):
     #return np.stack([face_map, mouth_map,hair_map], axis=2)
     return np.stack([face_map, mouth_map], axis=2)
 
+def hair_encode_segmentation_rgb(segmentation):
+    """
+    hairstyle change
+    """
+    parse = segmentation
+
+    hair_id = 17
+    hair_map = np.zeros([parse.shape[0], parse.shape[1]])
+    valid_index = np.where(parse==hair_id)
+    hair_map[valid_index] =255
+
+    return np.stack([hair_map],axis=2)
+    
+
 
 class SoftErosion(nn.Module):
     def __init__(self, kernel_size=15, threshold=0.6, iterations=1):

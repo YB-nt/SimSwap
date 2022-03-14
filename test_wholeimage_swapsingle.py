@@ -36,7 +36,7 @@ def _totensor(array):
     return img.float().div(255)
 if __name__ == '__main__':
     opt = TestOptions().parse()
-
+    hairchg= opt.hairchg
     start_epoch, epoch_iter = 1, 0
     crop_size = opt.crop_size
 
@@ -101,9 +101,20 @@ if __name__ == '__main__':
             net.eval()
         else:
             net =None
+        ############################################
+        ############################################    
+        print('************ tensor ************')
+        for tensor_check in b_align_crop_tenor_list:
+            print(tensor_check)
+        print('************ swap_result ************')
+        for swap_result in swap_result_list:
+            print(swap_result)
+        ############################################
+        ############################################
 
+        
         reverse2wholeimage(b_align_crop_tenor_list, swap_result_list, b_mat_list, crop_size, img_b_whole, logoclass, \
-            os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm)
+            os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm,hairchg=hairchg)
 
         print(' ')
 
