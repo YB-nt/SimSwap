@@ -42,6 +42,7 @@ def tensor_to_image(tensor):
         assert tensor.shape[0] == 1
         tensor = tensor[0]
     return Image.fromarray(tensor)
+
 if __name__ == '__main__':
     opt = TestOptions().parse()
     hairchg= opt.hairchg
@@ -81,7 +82,7 @@ if __name__ == '__main__':
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
         ############## print identity ##############
-        print_image = cv2.imread(tensor_to_image(latend_id.cpu()))
+        print_image = tensor_to_image(latend_id.cpu())
         print_image.show()
         ############## Forward Pass ######################
 
