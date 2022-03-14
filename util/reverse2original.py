@@ -121,6 +121,7 @@ def reverse2wholeimage(b_align_crop_tenor_list,swaped_imgs, mats, crop_size, ori
             out = pasring_model(source_img_512)[0]
             parsing = out.squeeze(0).detach().cpu().numpy().argmax(0)
             vis_parsing_anno = parsing.copy().astype(np.uint8)
+            print("Hair change option :",hairchg)
             if(hairchg!=True):
                 tgt_mask = hair_encode_segmentation_rgb(vis_parsing_anno)
             else:

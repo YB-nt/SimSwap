@@ -103,12 +103,12 @@ if __name__ == '__main__':
             net =None
         ############################################
         ############################################    
-        print('************ tensor ************')
-        for tensor_check in b_align_crop_tenor_list:
-            print(tensor_check)
-        print('************ swap_result ************')
-        for swap_result in swap_result_list:
-            print(swap_result)
+        # print('************ tensor ************')
+        # for tensor_check in b_align_crop_tenor_list:
+        #     print(tensor_check)
+        # print('************ swap_result ************')
+        # for swap_result in swap_result_list:
+        #     print(swap_result)
         ############################################
         ############################################
 
