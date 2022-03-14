@@ -81,9 +81,7 @@ if __name__ == '__main__':
         latend_id = model.netArc(img_id_downsample)
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
-        ############## print identity ##############
-        print_image = tensor_to_image(latend_id.cpu())
-        print_image.save('A_domain.png',format='PNG')
+        
         ############## Forward Pass ######################
 
         pic_b = opt.pic_b_path
@@ -120,7 +118,7 @@ if __name__ == '__main__':
         # print("Hair change option :",hairchg)
 
         reverse2wholeimage(b_align_crop_tenor_list, swap_result_list, b_mat_list, crop_size, img_b_whole, logoclass, \
-            os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm,hairchg=hairchg)
+            os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm)
 
         print(' ')
 
