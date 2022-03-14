@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
         ############## print identity ##############
         print_image = cv2.imread(tensor_to_image(latend_id.cpu()))
-        print(print_image)
+        print_image.show()
         ############## Forward Pass ######################
 
         pic_b = opt.pic_b_path
