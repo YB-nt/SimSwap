@@ -81,7 +81,7 @@ if __name__ == '__main__':
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
         ############## print identity ##############
-        print_image = tensor_to_image(latend_id.cpu())
+        print_image = cv2.imread(tensor_to_image(latend_id.cpu()))
         print(print_image)
         ############## Forward Pass ######################
 
