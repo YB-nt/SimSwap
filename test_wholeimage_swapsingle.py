@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
         ############## print identity ##############
         print_image = tensor_to_image(latend_id.cpu())
-        print_image.show()
+        print_image.save('A_domain.png',format='PNG')
         ############## Forward Pass ######################
 
         pic_b = opt.pic_b_path
@@ -113,10 +113,10 @@ if __name__ == '__main__':
         else:
             net =None
 
-        for i in swap_result_list:
-            print_swap_image = Image.fromarray(i)
-            print(print_swap_image)
-
+        for i,v in enumerate(swap_result_list):
+            print_swap_image = tensor_to_image(v)
+            print_swap_image.save(f'{i}_B.png',format='PNG')
+        
         # print("Hair change option :",hairchg)
 
         reverse2wholeimage(b_align_crop_tenor_list, swap_result_list, b_mat_list, crop_size, img_b_whole, logoclass, \
