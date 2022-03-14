@@ -73,10 +73,10 @@ if __name__ == '__main__':
         latend_id = F.normalize(latend_id, p=2, dim=1)
 
         ############## print identity ##############
-        print(type(latend_id))
+        
 
-        print_image=Image.fromarray(latend_id)
-        # print(print_image)
+        print_image=Image.fromarray(_totensor(latend_id))
+        print(print_image)
         ############## Forward Pass ######################
 
         pic_b = opt.pic_b_path
