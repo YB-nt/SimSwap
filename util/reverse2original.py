@@ -87,7 +87,7 @@ def postprocess(swapped_face, target, target_mask,smooth_mask):
     return result
 
 def reverse2wholeimage(b_align_crop_tenor_list,swaped_imgs, mats, crop_size, oriimg, logoclass, save_path = '', \
-                    no_simswaplogo = False,pasring_model =None,norm = None, use_mask = False):
+                    no_simswaplogo = False,pasring_model =None,norm = None, use_mask = False,hairchg=False):
 
     target_image_list = []
     img_mask_list = []
@@ -121,7 +121,12 @@ def reverse2wholeimage(b_align_crop_tenor_list,swaped_imgs, mats, crop_size, ori
             out = pasring_model(source_img_512)[0]
             parsing = out.squeeze(0).detach().cpu().numpy().argmax(0)
             vis_parsing_anno = parsing.copy().astype(np.uint8)
-            tgt_mask = encode_segmentation_rgb(vis_parsing_anno)
+            if(hairchg!=True):
+                tgt_mask = hair_encode_segmentation_rgb(vis_parsing_anno)
+            else:
+                tgt_mask = encode_segmentation_rgb(vis_parsing_anno)
+            
+            
             if tgt_mask.sum() >= 5000:
                 # face_mask_tensor = tgt_mask[...,0] + tgt_mask[...,1]
                 target_mask = cv2.resize(tgt_mask, (crop_size,  crop_size))
